@@ -2,7 +2,7 @@
   "games": [
     {
       "username": "test",
-      "password": "REPLACE_WITH_YOUR_PASSWORD",
+      "password": "testpass",
       "file": "jeopardy.json"
     }
   ]
