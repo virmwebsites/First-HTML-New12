@@ -1,3 +1,6 @@
+let GAME_DATA;
+let VALUES;
+let TEAM_COUNT;
 let scores = [];
 let activeCard = null;
 let currentValue = 0;
@@ -236,8 +239,76 @@ function toggleTheme() {
 function updateThemeButton() {
   const btn = document.getElementById("themeToggle");
   if (btn) btn.textContent = document.documentElement.classList.contains("light-theme") ? "Dark Mode" : "Light Mode";
-  const landingBtn = document.getElementById("landingThemeBtn");
-  if (landingBtn) landingBtn.textContent = document.documentElement.classList.contains("light-theme") ? "Dark Mode" : "Light Mode";
 }
 
-updateThemeButton();
+async function loadGameFile(file, registryUrl) {
+  const gameUrl = new URL(file, registryUrl);
+  if (gameUrl.origin !== window.location.origin) {
+    throw new Error("Game files must be hosted on this site");
+  }
+
+  const response = await fetch(gameUrl);
+  if (!response.ok) {
+    throw new Error(`Unable to load game file (${response.status})`);
+  }
+
+  const data = await response.json();
+  const game = Array.isArray(data.games) ? data.games[0] : data;
+  if (!game || !Array.isArray(game.categories) || !Array.isArray(game.cards) ||
+      !Array.isArray(game.values) || !Number.isInteger(game.team_count)) {
+    throw new Error("Game data is missing or invalid");
+  }
+
+  GAME_DATA = { categories: game.categories, cards: game.cards };
+  VALUES = game.values;
+  TEAM_COUNT = game.team_count;
+  completed.clear();
+  activeCard = null;
+  currentValue = 0;
+  isDailyDouble = false;
+  dailyDoubleWager = 0;
+  document.getElementById("gameTitle").textContent = game.name || "Jeopardy";
+  document.getElementById("loginScreen").hidden = true;
+  document.getElementById("gameScreen").hidden = false;
+  initGame();
+}
+
+async function handleLogin(event) {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const username = form.elements.username.value.trim();
+  const password = form.elements.password.value;
+  const error = document.getElementById("loginError");
+  error.textContent = "";
+
+  try {
+    const registryResponse = await fetch("data/games.json");
+    if (!registryResponse.ok) {
+      throw new Error(`Unable to load game registry (${registryResponse.status})`);
+    }
+
+    const registry = await registryResponse.json();
+    const entry = registry.games?.find(game =>
+      game.username === username && game.password === password
+    );
+    if (!entry || typeof entry.file !== "string") {
+      error.textContent = "Username or password is incorrect.";
+      return;
+    }
+
+    await loadGameFile(entry.file, registryResponse.url);
+  } catch (loadError) {
+    console.error("Failed to open the Jeopardy game.", loadError);
+    error.textContent = "Unable to load the game. Check the game registry and game file.";
+  }
+}
+
+function showLogin() {
+  document.getElementById("gameScreen").hidden = true;
+  document.getElementById("loginScreen").hidden = false;
+  document.getElementById("loginForm").reset();
+  document.getElementById("loginError").textContent = "";
+}
+
+document.getElementById("loginForm").addEventListener("submit", handleLogin);
+document.getElementById("username").focus();

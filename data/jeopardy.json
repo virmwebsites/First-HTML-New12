@@ -1,10 +1,7 @@
 {
   "games": [
     {
-      "game_code": "IKL21D",
       "name": "ABL Collateral Jeopardy",
-      "password": "Siena",
-      "created_at": "2026-07-19 18:03:25",
       "categories": [
         "Accounts Receivable",
         "Deal Structuring",
@@ -179,8 +176,8 @@
           "category": "Potpourri",
           "order": 3,
           "dailyDouble": false,
-          "question": "What is the difference between AR Terms \u201cFOB Shipping\u201d and \u201cFOB Destination\u201d? What are the implications for eligibility?",
-          "answer": "FOB Shipping means title transfers when goods ship. FOB Destination means the borrower still owns the goods until they reach the customer\u2019s destination. Invoice date should match title transfer because that is when the transaction becomes eligible AR."
+          "question": "What is the difference between AR Terms “FOB Shipping” and “FOB Destination”? What are the implications for eligibility?",
+          "answer": "FOB Shipping means title transfers when goods ship. FOB Destination means the borrower still owns the goods until they reach the customer’s destination. Invoice date should match title transfer because that is when the transaction becomes eligible AR."
         },
         {
           "category": "Potpourri",
@@ -193,21 +190,21 @@
           "category": "Fraud",
           "order": 0,
           "dailyDouble": false,
-          "question": "Thinking back to the \u201cWhere\u2019s the Beef\u201d article, McClain\u2019s account showed signs of this specific fraud \u2014 exploiting the delay between when checks are deposited and when they clear to create the illusion of available funds.",
+          "question": "Thinking back to the “Where’s the Beef” article, McClain’s account showed signs of this specific fraud — exploiting the delay between when checks are deposited and when they clear to create the illusion of available funds.",
           "answer": "Check kiting"
         },
         {
           "category": "Fraud",
           "order": 1,
           "dailyDouble": false,
-          "question": "While reviewing a borrower\u2019s bank statements, you identify recurring transfers between multiple operating accounts and personal accounts owned by principals. What are potential next steps?",
+          "question": "While reviewing a borrower’s bank statements, you identify recurring transfers between multiple operating accounts and personal accounts owned by principals. What are potential next steps?",
           "answer": "Review cancelled checks or wire details for remittance references. Ask what the transactions represent and how they are accounted for."
         },
         {
           "category": "Fraud",
           "order": 2,
           "dailyDouble": false,
-          "question": "When a borrower defaults, what is the formal communication that Siena sends to acknowledge the default?",
+          "question": "When a borrower defaults, what formal communication does the lender send to acknowledge the default?",
           "answer": "Reservation of Rights Letter"
         },
         {

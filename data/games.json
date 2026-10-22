@@ -1,0 +1,9 @@
+{
+  "games": [
+    {
+      "username": "test",
+      "password": "REPLACE_WITH_YOUR_PASSWORD",
+      "file": "jeopardy.json"
+    }
+  ]
+}
